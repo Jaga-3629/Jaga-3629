@@ -1,6 +1,6 @@
 - 👋 Hi, I’m Jagadesh P R
 - 👀 I’m interested in Python and java programming
-- 🌱 I’m currently learning networking
+- 🌱 I’m currently learning Machine learning
 - 💞️ I’m looking to collaborate on projects which are innovative,and make me learn many new skills.
 - 📫 How to reach me https://www.linkedin.com/in/jagadesh-p-r-650743172/
 
