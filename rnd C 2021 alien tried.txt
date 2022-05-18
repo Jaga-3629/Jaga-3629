@@ -1,0 +1,16 @@
+for kl in range(int(input())):
+    n=int(input())
+    stdin=n
+    co=1
+    while(stdin>0):
+        vk=stdin
+        ind=0;
+        res=0;
+        while(vk<n):
+            ind+=1
+            res+=(ind)
+            vk=(stdin*(ind+1))+res
+            if(vk==n):
+                co+=1
+        stdin-=1
+    print("Case #"+str(kl+1)+":",co)

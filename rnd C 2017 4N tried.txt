@@ -1,0 +1,63 @@
+for kl in range(int(input())):
+    mini,maxi,mea,med=map(int,input().split(" "))
+    fl=0
+    mgr=0
+    if((mini>maxi) or (mea>maxi) or (med>maxi)):
+        fl=1
+    else:
+        res=[mini,maxi]
+        kpr=sum(res)/len(res)
+        if(kpr%1==0):
+            trw=int(kpr)
+        else:
+            trw=kpr
+        if(trw<mea):
+            x=mea*(len(res)+1)-sum(res)
+            if(x not in res):
+                res.append(x)
+        elif(trw>mea):
+            fl=1
+        res=list(set(res))
+        res.sort()
+        if((len(res)%2==0) and (fl==0)):
+            lk1=res[len(res)//2]
+            lk2=res[(len(res)//2)-1]
+            kv=(lk1+lk2)/2
+            if(kv%1==0):
+                vtr=int(kv)
+            else:
+                vtr=kv
+            if(vtr==med):
+                print("Case #{}: {}".format(kl+1,len(res)))
+            elif(lk1<med):
+                y=(2*med)-lk1
+                if(y not in res):
+                    print("Case #{}: {}".format(kl+1,len(res)+1))
+                else:
+                    print("Case #{}: {}".format(kl+1,len(res)))
+            elif(lk2<med):
+                y=(2*med)-lk2
+                if(y not in res):
+                    print("Case #{}: {}".format(kl+1,len(res)+1))
+                else:
+                    print("Case #{}: {}".format(kl+1,len(res)))
+            else:
+                fl=1
+        elif(fl==0):
+            kv=res[(len(res)//2)-1]
+            if(kv%1==0):
+                vtr=int(kv)
+            else:
+                vtr=kv
+            if(vtr==med):
+                print("Case #{}: {}".format(kl+1,len(res)))
+            elif(vtr<med):
+                y=(2*med)-vtr
+                if(y not in res):
+                    print("Case #{}: {}".format(kl+1,len(res)+1))
+                else:
+                    print("Case #{}: {}".format(kl+1,len(res)))
+            else:
+                fl=1
+    if(fl==1):
+        print("Case #{}: IMPOSSIBLE".format(kl+1))

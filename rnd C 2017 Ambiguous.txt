@@ -1,0 +1,50 @@
+for kl in range(int(input())):
+    inp=input()
+    gk=len(inp)
+    x=[-1]*gk
+    yt=[0]*gk
+    try:
+        for jk in range(0,gk,2):
+            lk=gk-1-jk
+            vm1=ord(inp[jk])-65
+            vm2=ord(inp[lk])-65
+            us1=1
+            us2=gk-2
+            if(jk!=0):
+                if(x[jk-1]==-1):
+                    oval1=x[jk+1]
+                    us1=jk-1
+                else:
+                    oval1=x[jk-1]
+                    us1=jk+1
+            if(lk!=gk-1):
+                if(x[lk-1]==-1):
+                    oval2=x[lk+1]
+                    us2=lk-1
+                else:
+                    oval2=x[lk-1]
+                    us2=lk+1
+            if(us1==1):
+                x[us1]=vm1
+                yt[us1]=chr(vm1+65)
+            else:
+                if(26+vm1-oval1>=26):
+                    x[us1]=(26+vm1-oval1)%26
+                    yt[us1]=chr(((26+vm1-oval1)%26)+65)
+                else:
+                    x[us1]=26+vm1-oval1
+                    yt[us1]=chr(26+vm1-oval1+65)
+            if(us2==gk-2):
+                x[us2]=vm2
+                yt[us2]=chr(vm2+65)
+            else:
+                if(26+vm2-oval2>=26):
+                    x[us2]=(26+vm2-oval2)%26
+                    yt[us2]=chr(((26+vm2-oval2)%26)+65)
+                else:
+                    x[us2]=26+vm2-oval2
+                    yt[us2]=chr(26+vm2-oval2+65)
+        str=""
+        print("Case #{}: {}".format(kl+1,str.join(yt)))
+    except:
+        print("Case #{}: AMBIGUOUS".format(kl+1))

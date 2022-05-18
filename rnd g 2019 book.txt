@@ -1,0 +1,17 @@
+for i in range(0,t):
+    n,to,re=map(int,input().split(" "))
+    a=list(map(int,input().split(" ")))
+    b=list(map(int,input().split(" ")))
+    ans=0
+    al=[True]*(n+1)
+    for ms in a:
+        al[ms]=False
+    rl={}
+    for kt in b:
+        try:
+            ans+=rl[kt]
+        except:
+            mg=sum(al[mh] for mh in range(kt,n+1,kt))
+            rl[kt]=mg
+            ans+=mg
+    print("Case #"+str(i+1)+":",ans,flush=True)

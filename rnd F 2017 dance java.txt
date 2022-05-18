@@ -1,0 +1,45 @@
+import java.util.*;
+public class MyClass {
+    public static void main(String args[]) {
+    Scanner sc=new Scanner(System.in);
+    int t=sc.nextInt();
+    for(int kl=1;kl<=t;kl++)
+    {
+    int e=sc.nextInt();
+    int n=sc.nextInt();
+    int sk[]=new int[n];
+    int h=0;
+    int mg=0;
+    int lp=n-1;
+    while(mg<=lp)
+    {   
+        if(mg<=n-1)
+        {
+        sk[mg]=sc.nextInt();
+        }
+        if(sk[mg]<e)
+        {
+            e=e-sk[mg];
+            h=h+1;
+        }
+        else if(sk[mg]>e) 
+        {
+            if(h==0)
+            {
+                int newarr[]=Arrays.copyOf(sk,n+1);
+                lp+=1;
+                sk=newarr.clone();
+                sk[lp]=sk[mg];
+            }
+            else
+            {
+                e=e+sk[mg];
+                h=h-1;
+            }
+        }
+        mg+=1;
+    }
+    System.out.println("Case #"+kl+": "+h);
+    }
+}
+}

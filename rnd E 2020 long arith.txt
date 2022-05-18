@@ -1,0 +1,43 @@
+t=int(input())
+for i in range(t):
+    tmp=[]
+    n=int(input())
+    a=list(map(int,input().split(" ")))
+    co=0
+    ms=0
+    mp=0
+    for ps in range(1,len(a)):
+        if(a[ps-1]>=a[ps]):
+            mp+=1
+            if(ps>1):
+                prev=dif
+            dif=a[ps-1]-a[ps]
+        else:
+            ms+=1
+            if(ps>1):
+                prev=dif
+            dif=a[ps]-a[ps-1]
+        if(ps>1):
+            if((mp==0) or (ms==0)):
+                if(prev==dif):
+                    co+=1
+                    if(ps==len(a)-1):
+                        if(co>0):
+                            tmp.append(co+2)
+                        else:
+                            tmp.append(co)
+                else:
+                    if(co>0):
+                        tmp.append(co+2)
+                    else:
+                        tmp.append(co)
+                    co=0
+            else:
+                mp=0
+                ms=0
+                if(co>0):
+                    tmp.append(co+2)
+                else:
+                    tmp.append(2)
+                co=0
+    print("Case #"+str(i+1)+":",max(tmp))

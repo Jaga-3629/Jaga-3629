@@ -1,0 +1,87 @@
+import math
+from sys import stdin,stdout
+import collections
+def prime(jy,kpr):
+    vrp=0
+    while(vrp==0):
+        fl=0
+        vce=2
+        lk=[]
+        while((vce<=int(math.sqrt(jy))+1) and (fl==0)):
+            if(jy%vce==0):
+                fl=1
+            else:
+                vce+=1
+        if(fl==0):
+            vrp==1
+            kpr.append(jy)
+            return kpr
+        else:
+            fkr=0
+            ljr=int(math.sqrt(jy))+1
+            while((ljr>=10) and (fkr==0)):
+                if(jy%ljr==0):
+                    fkr=1
+                    kpr.append(ljr)
+                    jy=jy//ljr
+                ljr-=1
+for kl in range(int(stdin.readline())):
+    l,r=map(int,stdin.readline().split(" "))
+    cot=0
+    for mg in range(l,r+1):
+        tmp=str(mg)
+        li=collections.deque([1])
+        tuy=[]
+        while(int(tmp)>1):
+            if(int(tmp[-1])%2==0):
+                tmp=int(tmp)//2
+                li.append(2)
+                tmp=str(tmp)
+            elif((int(tmp[-1])==5) or (int(tmp[-1])==0)):
+                tmp=int(tmp)//5
+                li.append(5)
+                tmp=str(tmp)
+            else:
+                if(int(tmp)%3==0):
+                    tmp=int(tmp)//3
+                    li.append(3)
+                    tmp=str(tmp)
+                elif(int(tmp)%7==0):
+                    tmp=int(tmp)//7
+                    li.append(7)
+                    tmp=str(tmp)
+                else:
+                    if(int(tmp)%11==0):
+                        tmp=int(tmp)//11
+                        li.append(11)
+                        tmp=str(tmp)
+                    else:
+                        tuy=prime(int(tmp),li)
+                        tmp="1"
+        if(len(tuy)==0):
+            vl=li
+        else:
+            vl=tuy
+        vl=list(vl)
+        krk=list(set(vl))
+ '''We can calculate how many odd factors of our number we have by multiplying the powers + 1 of each odd prime factor. For example, if our odd prime factors are 
+3³ * 5², then we do (3+1)*(2+1) to get 8 total odd factors. To get how many even factors there are, we simply multiply by how many even prime factors by the count
+ of odd factors we calculated earlier.'''
+        cod=1
+        for mty in krk:
+            if((mty%2!=0) and (mty!=1)):
+                cod=cod*(vl.count(mty)+1)
+        if(cod>1):
+            if(vl.count(2)>0):
+                cev=(vl.count(2))*cod
+            else:
+                cev=0
+        else:
+            cod=1
+            cev=vl.count(2)
+        if(abs(cod-cev)<=2):
+            cot+=1
+    a1=str(kl+1)
+    a2=str(cot)
+    stdout.write("Case #%s: "%a1)
+    stdout.write(a2+"\n")

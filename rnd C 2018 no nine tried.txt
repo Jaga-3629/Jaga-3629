@@ -1,0 +1,49 @@
+t=int(input())
+for kl in range(t):
+    l,r=map(int,input().split())
+    re=0
+    c1=0
+    c2=0
+    c3=0
+    while(l<=r):
+        tmp=list(str(l))
+        vk=0
+        if((l>0) and (l%9!=0) and ("9" not in tmp)):
+           # print("k1",l)
+            c1+=1
+            #print("c1",c1)
+            re+=1
+            l+=1
+        else:
+            vl=0
+            lk=0
+            if("9" not in list(str(l+8))):
+                lk=1
+                if("9" in list(str(l+9))):
+                    vl=1
+            if((l+9<=r) and (l%9==0) and ("9" not in tmp) and (vl==1)):
+               # print("k2",l)
+                c2+=1
+                #print("c2",c2)
+                l+=10
+                re+=8
+            elif((l+9<=r) and (l%9==0) and ("9" not in tmp) and (lk==1)):
+                #print("k3",l)
+                c3+=1
+                #print("c3",c3)
+                l+=10
+                re+=7
+            elif("9" in tmp):
+                #print("k4",l)
+                mn=tmp.index("9")
+                l=l+int(str(1)+"0"*((len(tmp)-1)-tmp.index("9")))
+                vrk=str(int(str(1)+"0"*((len(tmp)-1)-tmp.index("9")))-13)
+                try:
+                    if(mn==vrk.index("9")):
+                        re+=1
+                except:
+                    pass
+            else:
+                #print("k5",l)
+                l+=1
+    print("Case #"+str(kl+1)+": ",re)

@@ -1,0 +1,28 @@
+for kl in range(int(input())):
+    n=int(input())
+    co1=0
+    co2=0
+    mat=""
+    st=[]
+    en=[]
+    for mk in range(n):
+        inp=input()
+        us=inp.count("X")
+        if(us==1):
+            vl=inp.index("X")
+            co1+=1
+        if(us==2):
+            km=inp.index('X')
+            st.append(km)
+            vm=inp[km+1:].index('X')
+            en.append(vm+km+1)
+            co2+=1
+    fl=0
+    vpt=len(list(set(st)))
+    kpt=len(list(set(en)))
+    if((vl not in st) and (vl not in en) and (vpt==n//2) and (kpt==n//2)):
+        fl=1
+    if((co1==1) and (co2==n-1) and (fl==1)):
+        print("Case #{}: POSSIBLE".format(kl+1))
+    else:
+        print("Case #{}: IMPOSSIBLE".format(kl+1))

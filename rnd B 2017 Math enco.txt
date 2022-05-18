@@ -1,0 +1,15 @@
+from itertools import combinations
+for vl in range(int(input())):
+    n=int(input())
+    kl=list(map(int,input().split(" ")))
+    lis=[]
+    for tr in range(2,n+1):
+        up=list(combinations(kl,tr))
+        for jk in up:
+            kr=list(jk)
+            lis.append(max(kr)-min(kr))
+    vm=sum(lis)
+    if(vm<(10**9)+7):
+        print("Case #{}: {}".format(vl+1,vm))
+    else:
+        print("Case #{}: {}".format(vl+1,vm%(10**9+7)))

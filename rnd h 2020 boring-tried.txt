@@ -1,0 +1,51 @@
+t=int(input())
+for k in range(t):
+    pt,qt=map(str,input().split())  
+    jk=list(pt)
+    vk=list(qt)
+    dig=1
+    ak=jk
+    ref=int(pt)
+    if(len(pt)==len(qt)):
+        tot=0
+        nvc=0
+        while(ref<=int(qt)):
+            mr=9-int(ak[-1])
+            if(mr+ref>=int(qt)):    #mr+ak[-1]
+                r=qt
+                ybt=str(r)
+                bk=list(ybt)
+                nvc=1
+            else:
+                r=ref+mr
+                ybt=str(r)
+                bk=list(ybt)
+            rek=0
+            if(int(r)<=ref+mr):
+                fl=0
+                pst=0
+                while((pst<len(ak)-1) and (fl==0)):
+                    if(pst%2==0):
+                        if(int(ak[pst])%2==0):
+                            fl=1
+                    else:
+                        if(int(ak[pst])%2!=0):
+                            fl=1
+                    pst+=1
+                if(fl==0):
+                    if(len(ak)%2==0):
+                        if((int(ak[-1])%2!=0) and (int(bk[-1])%2!=0)):
+                            rek=rek+((int(r)-ref)//2)
+                        else:
+                            rek=rek+((int(r)-ref)//2)+1
+                    else:
+                        if((int(ak[-1])%2==0) and (int(bk[-1])%2==0)):
+                            rek=rek+((int(r)-ref)//2)
+                        else:
+                            rek=rek+((int(r)-ref)//2)+1
+                ref=ref+mr+1
+                vr=str(ref)
+                ak=list(vr)
+                tot=tot+rek
+    print(tot)
+            

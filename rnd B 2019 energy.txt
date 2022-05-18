@@ -1,0 +1,68 @@
+t=int(input())
+for kl in range(t):
+    time=0
+    fa=0
+    tlist=[]
+    elist=[]
+    llist=[]
+    n=int(input())
+    for ms in range(n):
+        t,e,l=map(int,input().split(" "))
+        tlist.append(t)
+        elist.append(e)
+        llist.append(l)
+    nllist=llist[:]
+    nllist.sort()
+    nllist.reverse()
+    while(len(nllist)>0):
+        use=nllist[0]
+        vu=llist.index(use)
+        if(nllist.count(nllist[0])==1):
+            fa=fa+(elist[vu]-(time*use))
+            time=time+tlist[vu]
+            nllist.pop(0)
+        else:
+            ur=[]
+            fl=0
+            ind=0
+            prev=0
+            umy=llist[:]
+            umy.reverse()
+            jpr=(len(umy)-1)-umy.index(use)
+            indli=[]
+            while(fl==0):
+                kr=llist[ind:].index(use)
+                if(ind!=0):
+                    ur.append(elist[prev+kr+1])
+                    indli.append(prev+kr+1)
+                    prev=prev+kr+1
+                else:
+                    ur.append(elist[prev+kr])
+                    indli.append(prev+kr)
+                    prev=prev+kr
+                    ind=prev+1
+                if(prev>=jpr):
+                    fl=1
+            kr=ur[:]
+            newli=[]
+            pr=[]
+            while(len(kr)>0):
+                mkp=max(kr)
+                ukg=ur.index(mkp)
+                newli.append(indli[ukg])
+                kr.remove(mkp)
+                pr.append(mkp)
+            if(len(set(pr))==1):
+                ytr=pr[0]
+                flt=0
+            else:
+                flt=1
+            prev=-1
+            for lnt in range(len(pr)):
+                if(flt==1):
+                    ytr=pr[lnt]
+                if(ytr-(time*use)>0):
+                    fa=fa+(ytr-(time*use))
+                    time=time+tlist[newli[lnt]]
+                nllist.pop(0)
+    print("Case #"+str(kl+1)+": ",fa)

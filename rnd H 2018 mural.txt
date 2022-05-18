@@ -1,0 +1,16 @@
+t=int(input())
+for kl in range(t):
+    n=int(input())
+    li=list(map(int,input()))
+    gre=0
+    for pr in range(n):
+        if(pr+(n//2)<=n):
+            if(n%2==0):
+                mrk=sum(li[pr:pr+(n//2)])
+            else:
+                mrk=sum(li[pr:pr+(n//2)+1])
+        else:
+            mrk=sum(li[pr:])
+        if(mrk>gre):
+            gre=mrk
+    print("Case #"+str(kl+1)+":",gre)

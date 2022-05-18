@@ -1,0 +1,19 @@
+for kl in range(1,int(input())+1):
+    n,k=map(int,input().split(" "))
+    str=input()
+    fr=0
+    en=len(str)-1
+    co=0
+    fl=0
+    while(fr<len(str)//2):
+        if(str[fr]!=str[en]):
+            co+=1
+        if(co>k):
+            fl=1
+        fr+=1
+        en-=1
+    if(fl==0):
+        print("Case #{}: {}".format(kl,k-co))
+    else:
+        print("Case #{}: {}".format(kl,co-k))
+

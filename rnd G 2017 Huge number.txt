@@ -1,0 +1,17 @@
+import math
+for kl in range(int(input())):
+    a,n,p=map(int,input().split(" "))
+    fl=0
+    ind=1
+    arr=[]
+    pow=math.factorial(n)
+    while(fl==0):
+        if((a**ind)%p not in arr):
+            arr.append((a**ind)%p)
+            if(pow==ind):
+                print("Case #"+str(kl+1)+":",(a**ind)%p)
+                fl=1
+            ind+=1
+        else:
+            print("Case #"+str(kl+1)+":",arr[(pow%(ind-1))-1])
+            fl=1

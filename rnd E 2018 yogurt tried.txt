@@ -1,0 +1,30 @@
+t=int(input())
+for kl in range(t):
+    n,k=map(int,input().split(" "))
+    a=list(map(int,input().split(" ")))
+    tmp=a[:]
+    tmp=list(set(tmp))
+    tmp.sort()
+    co=[a.count(jk) for jk in tmp]
+    da=0
+    fre=0
+    ind=0
+    while(ind<len(tmp)):
+        if(da<tmp[ind]):
+            if(co[ind]>k):
+                co[ind]=co[ind]-k
+                fre+=k
+            else:
+                fre+=co[ind]
+                ind+=1
+        else:
+            ind+=1
+            if((ind<len(tmp)) and (da<tmp[ind])):
+                if(co[ind]>k):
+                    co[ind]=co[ind]-k
+                    fre+=k
+                else:
+                    fre+=co[ind]
+                    ind+=1
+        da+=1
+    print("Case #"+str(kl+1)+":",fre)

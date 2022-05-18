@@ -1,0 +1,29 @@
+for kl in range(int(input())):
+    n=int(input())
+    mat1=[[] for kpr in range(n)]
+    mat2=[[] for kpr in range(n-1)]
+    co=0
+    li1=[0]
+    fl=[]
+    for mg in range(n):
+        lis=list(map(int,input().split(" ")))
+        vm=co
+        jk=0
+        for hk in range(len(lis)):
+            if(co>=1):
+                if(jk<len(li1)):
+                    mat2[li1[hk]].append(lis[hk])
+            if((hk<n) and (vm<n)):
+                mat1[hk].append(lis[vm])
+            vm+=1
+            jk+=1
+        if(co>=1):
+            li1.insert(0,li1[0]+1)
+        co+=1
+    vpr=0
+    for lp in range(n):
+        if(sum(mat1[lp])>vpr):
+            vpr=sum(mat1[lp])
+        if((lp<n-1) and (sum(mat2[lp])>vpr)):
+            vpr=sum(mat2[lp])
+    print("Case #{}: {}".format(kl+1, vpr))

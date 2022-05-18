@@ -1,0 +1,17 @@
+t=int(input())
+for i in range(t):
+    st=input()
+    li=[]
+    li2=[]
+    for jt in range(0,len(st)):
+        if((st[jt]=='K') and (st[jt:jt+4]=="KICK")):
+            li.append(jt)
+        if((st[jt]=='S') and (st[jt:jt+5]=="START")):
+            li2.append(jt)
+    tot=0
+    if((len(li)>0) and (len(li2)>0)):
+        for mp in range(0,len(li)):
+            pt=[km for km in li2 if km>li[mp]]
+            tot=tot+len(pt)
+    print("Case #"+str(i+1)+": ",tot)
+        

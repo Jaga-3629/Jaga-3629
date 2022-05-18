@@ -1,0 +1,59 @@
+t=int(input())
+for mn in range(t):
+    le=int(input())
+    arr=list(map(int,input().split()))
+    stlis=[]
+    enlis=[]
+    diff=[]
+    num=[]
+    kl=1
+    frw=[]
+    while(kl<le):
+        jk=arr[kl-1]-arr[kl]
+        st=kl-1
+        lk=2
+        kl+=1
+        jh=0
+        while((kl<le) and (arr[kl-1]-arr[kl]==jk)):
+            jh=1
+            lk+=1
+            kl+=1
+        en=kl-1
+        if((en<le-2) and (arr[en]-(2*jk)==arr[en+2])):
+            frw.append([lk+1,len(num)])
+        num.append(lk)
+        diff.append(jk)
+        stlis.append(st)
+        enlis.append(en)
+    fr=[]
+    com=[]
+    ft=0
+    for mg in range(len(stlis)):
+        if(enlis[mg]+2 in stlis):
+            nv=stlis.index(enlis[mg]+2)
+            if(diff[mg]==diff[nv]):
+                if(arr[enlis[mg]]-(2*diff[mg])==arr[enlis[mg]+2]):
+                    ft=1
+                    com.append(diff[mg])
+                    try:
+                        kr=com.index(diff[mg])
+                        if(num[mg]+num[nv]>fr[kr]):
+                            fr[kr]=num[mg]+num[nv]
+                    except:
+                        fr.append(num[mg]+num[nv])
+    if(ft==0):
+        for kpr in frw:
+            num[kpr[1]]=kpr[0]
+    if(len(fr)>0):
+        if(max(fr)+1>max(num)):
+            print("Case #"+str(mn+1)+":",max(fr)+1)
+        else:
+            if(max(num)==le):
+                print("Case #"+str(mn+1)+":",max(num))
+            else:
+                print("Case #"+str(mn+1)+":",max(num)+1)
+    else:
+        if(max(num)==le):
+            print("Case #"+str(mn+1)+":",max(num))
+        else:
+            print("Case #"+str(mn+1)+":",max(num)+1)

@@ -1,0 +1,40 @@
+#include <cstdio>
+using namespace std;
+
+int tc, n, m, k, ans;
+int a[333][333];
+int ma[333], mi[333];
+
+int main() {
+    scanf("%d", &tc);
+    for (int t = 1; t <= tc; t++) {
+        scanf("%d%d%d", &n, &m, &k);
+        ans = n;
+        for (int i = 1; i <= n; i++)
+            for (int j = 1; j <= m; j++)
+                scanf("%d", &a[i][j]);
+        for (int l = 1; l <= m; l++) {
+            for (int i = 1; i <= n; i++)
+                ma[i] = mi[i] = a[i][l];
+            for (int r = l + 1; r <= m; r++) {
+                int cur = 0, t = 0;
+                for (int i = 1; i <= n; i++) {
+                    if (a[i][r] > ma[i])
+                        ma[i] = a[i][r];
+                    if (a[i][r] < mi[i])
+                        mi[i] = a[i][r];
+                    if (ma[i] - mi[i] <= k)
+                        cur += 1;
+                    else
+                        cur = 0;
+                    if (cur > t) t = cur;
+                }
+                if (t * (r - l + 1) > ans)
+                    ans = t * (r - l + 1);
+            }
+        }
+        printf("Case #%d: %d\n", t, ans);
+    }
+
+    return 0;
+}

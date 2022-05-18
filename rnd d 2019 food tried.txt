@@ -1,0 +1,36 @@
+t=int(input())
+for kl in range(t):
+    k,n=map(int,input().split())
+    met=list(map(int,input().split()))
+    co=list(map(int,input().split()))
+    tmp=met[:]
+    tmp.sort()
+    if(met!=tmp):
+        co1=[]
+        for kp in tmp:
+            co1.append(co[met.index(kp)])
+        met=tmp[:]
+        co=co1[:]
+    if(k%2!=0):
+        us=(k//2)-1
+    else:
+        us=k//2
+    kgf=n//2
+    fc=0
+    ind=1
+    while(ind<=us):
+        fc=fc+abs(met[kgf]-met[kgf+ind])+abs(met[kgf]-met[kgf-ind])
+        fc=fc+co[kgf+ind]+co[kgf-ind]
+        ind+=1
+    if(k%2!=0):
+        lef=co[kgf-((k//2)+1):kgf]
+        rig=co[kgf+1:kgf+((k//2)+2)]
+        if(lef[0]+abs(met[kgf]-met[kgf-((k//2)+1)])<=rig[-1]+abs(met[kgf]-met[kgf+((k//2)+1)])):
+            val=-((k//2)+1)
+        else:
+            val=((k//2)+1)
+        fc=fc+abs(met[kgf]-met[kgf+val])
+        fc=fc+co[kgf+val]
+    fc=fc+co[kgf]
+    print("Case #"+str(kl+1)+": ",fc)
+    

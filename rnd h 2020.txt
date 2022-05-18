@@ -1,0 +1,13 @@
+t=int(input())
+for pl in range(t):
+    n,k,s=(map(int,input().split(" ")))
+    if(k-s>0):
+        col=(k-s)+(n-s)
+    else:
+        col=n-k
+    if(n+k>col+k):
+        print("Case #"+str(pl+1)+": ",col+k)
+    elif(col+k>n+k):
+        print("Case #"+str(pl+1)+": ",n+k)
+    else:
+        print("Case #"+str(pl+1)+": ",col+k)

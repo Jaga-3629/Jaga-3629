@@ -1,0 +1,19 @@
+for kl in range(int(input())):
+    e,n=map(int,input().split(" "))
+    sk=list(map(int,input().split(" ")))
+    h=0
+    mg=0
+    lp=n-1
+    while(mg<=lp):
+        if(sk[mg]<e):
+            e-=sk[mg]
+            h+=1
+        elif(sk[mg]>e):
+            if(h==0):
+                sk=sk+[sk[mg]]
+                lp+=1
+            else:
+                e+=sk[mg]
+                h-=1
+        mg+=1
+    print("Case #{}: {}".format(kl+1,h))

@@ -1,0 +1,58 @@
+def func(prevf,currf,l1,l2,ck):
+    in1=0
+    in2=0
+    for lp in currf:
+        if(lp in l1):
+            in1=1
+        if(lp in l2):
+            in2=1
+        if((in1==1) and (in2==1)):
+            lis=[prevf,ck+1,3]
+            return lis
+    vl1=0
+    vl2=0
+    for jkr in currf:
+        if(jkr in prevf):
+            vl1=1
+        if(jkr in l2):
+            vl2=1
+        if((vl1==1) and (vl2==1)):
+            prevf=currf
+            lis=[prevf,ck+1,ck+1]
+            return lis
+    if(vl1==1):
+        prevf=currf
+        lis=[prevf,ck+1,0]
+        return lis
+    else:
+        lis=[prevf,ck,0]
+        return lis
+for kl in range(int(input())):
+    n,q=map(int,input().split(" "))
+    nam=list(map(str,input().split(" ")))
+    print("Case #"+str(kl+1)+":",end=" ")
+    for mg in range(q):
+        k1,k2=map(int,input().split(" "))
+        fk=0
+        for mgr in nam[k1-1]:
+            if(mgr in nam[k2-1]):
+                print(2,end=" ")
+                fk=1
+                break
+        co=2
+        prev=nam[k1-1]
+        mc=0
+        if(fk==0):
+            for rtr in range(0,n):
+                if((rtr!=k1-1) and (rtr!=k2-1)):
+                    km=func(prev,nam[rtr],nam[k1-1],nam[k2-1],co)
+                    if(km[2]==0):
+                        prev=km[0]
+                        co=km[1]
+                    else:
+                        print(km[2],end=" ")
+                        mc=1
+                        break
+        if((fk==0) and (mc==0)):
+            print("-1",end=" ")
+    print()
