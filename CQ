@@ -1,0 +1,138 @@
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.previous=None
+        self.next=None
+class linkedlist:
+    def __init__(self):
+        self.head=None
+        self.tail=None
+        self.rear=-1
+        self.front=0
+    def push(self,data):
+        if(self.head==None):
+            nn=Node(data)
+            self.head=self.tail=nn
+            self.head.next=self.tail
+            self.head.prev=self.tail
+        else:
+            newNode=Node(data)
+            self.tail.next = newNode;   
+            newNode.previous = self.tail;    
+            self.tail = newNode;
+            self.head.previous=self.tail
+            self.tail.next = self.head;  
+        self.rear+=1
+    def display(self):
+        tmp=self.head
+        if(self.head is None):
+            print("The list is empty")
+        else:
+            print(tmp.data)
+            while(tmp.next!=self.head):
+                tmp=tmp.next
+                print(tmp.data)
+    def count(self):
+        tmp=self.head
+        c=1
+        while(tmp.next!=self.head):
+            c+=1
+            tmp=tmp.next
+        return c
+    def rotate(self,n):
+        current = self.head;  
+        for i in range(0,n-1):
+            current=current.next
+        self.tail.next=self.head
+        self.head=current.next
+        current.previous=None
+        self.tail=current
+        self.tail.next=self.head
+    def sort(self):
+        srt=self.head
+        new=[]
+        new.append(srt.data)
+        while srt is not None:
+            srt=srt.next
+            new.append(srt.data)
+        new.sort()
+        newll=linkedlist()
+        for i in new:
+            newll.push(i)
+        return newll
+    def rev(self):
+        revt=self.head
+        rever=[]
+        rever.append(revt.data)
+        while revt.next!=self.head:
+            revt=revt.next
+            rever.append(revt.data)
+        rever.reverse()
+        newrll=linkedlist()
+        for i in rever:
+            newrll.push(i)
+        return newrll
+    '''def delll(self):
+        w=self.head
+        while(w is  not None):
+            del w.data
+            w=w.next'''
+def delatbeg(ll):
+    if(ll.head.next==ll.head):
+        ll.head=ll.tail=None
+        tmp=None
+    else:
+        ll.head=ll.head.next
+        ll.head.prev=ll.tail
+        ll.tail.next=ll.head
+        tmp=None
+def delatmid(ll):
+    kl=ll
+    lo=ll.prev
+    ps=ll.next
+    lo.next=ll.next
+    ps.prev=lo
+    kl=None
+def delete(ll):
+    tmp=ll.head
+    if(tmp is None):
+        print("The list is empty")
+    else:
+        while(tmp.next!=ll.head):
+            ty=getpos(ll,tmp)
+            if(ty==1):
+                delatbeg(ll)
+            elif(ty==length(ll)):
+                delatend(ll)
+            else:
+                delatmid(tmp)
+            self.front+=1
+            tmp=tmp.next
+        if(tmp.data%2!=0):
+            delatend(ll)
+def getpos(ll,mlt):#to get the position of a node
+    tmp=ll.head
+    co=1
+    if(tmp.next==ll.head):
+        return co
+    else:
+        while(tmp.next!=ll.head):
+            if(tmp==mlt):
+                return co
+            if(tmp==ll.tail.prev):
+                return co+1
+            tmp=tmp.next
+            co+=1
+l=linkedlist()
+l.push(4)
+l.push(3)
+l.push(2)
+#l.delete(2)
+'''l.push(1)
+l.push(9)
+l.push(11)
+l.delete(11)'''
+l.display()
+print(l.tail.next.data)
+#print(l.rear)
+#print(l.front)

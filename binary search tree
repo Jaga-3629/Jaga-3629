@@ -1,0 +1,198 @@
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+    def insert(self,key):
+        if self.data:
+            if(key<self.data):
+                if(self.left is None):
+                    self.left=node(key)
+                else:
+                    self.left.insert(key)
+            else:
+                if(self.right is None):
+                    self.right=node(key)
+                else:
+                    self.right.insert(key)
+def inorderwore(root):
+    stack=[]
+    current=root
+    while True:
+      if root is not None:
+          stack.append(root)
+          root=root.left
+      elif(stack):
+          stack.pop()
+          print(root.data)
+          root=root.right
+      else:
+          break
+
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.data,end=" ")
+        inorder(root.right)
+def preorder(root):
+    if root:
+        print(root.data,end=" ")
+        preorder(root.left)
+        preorder(root.right)
+def postorder(root):
+    if root:
+        postorder(root.left)
+        postorder(root.right)
+        print(root.data,end=" ")
+def minval(root):
+    h=root
+    while(h.left is not None):
+        pre=h
+        h=h.left
+    return h
+def maxval(root):
+    h=root
+    while(h.right is not None):
+        h=h.right
+    return h
+def delete(root,key):
+    if(root is None):
+        return root
+    if(key<root.data):
+        root.left=delete(root.left,key)
+    elif(key>root.data):
+        root.right=delete(root.right,key)
+    else:
+        if(root.left is None):
+            temp=root.right
+            root=None
+            return temp
+        elif(root.right is None):
+            temp=root.left
+            root=None
+            return temp
+        temp=minval(root.right)
+        root.data=temp.data
+        root.right=delete(root.right,temp.data)
+    return root
+def levelordertrav(root):
+    queue=[]
+    queue.append(root)
+    while(len(queue)>0):
+        print(queue[0].data)
+        tmp=queue.pop(0)
+        if(tmp.left is not None):
+            queue.append(tmp.left)
+        if(tmp.right is not None):
+            queue.append(tmp.right)
+def mylogicinorder(root,res):
+    if(not(root.data in res)):
+        res.append(root.data)
+    if root:
+        if(root.left is not None):
+            kl=res.index(root.data)
+            if(kl==0):
+                res.insert(0,root.left.data)
+            else:
+                res.insert(kl,root.left.data)
+            inorder(root.left,res)
+        if(root.right is not None):
+            kl=res.index(root.data)
+            res.insert(kl+1,root.right.data)
+            inorder(root.right,res)
+    return res
+def level(root,lvl,k):#to find the level of the data in k
+    if(root==None):
+        return 0
+    if(root.data==k):
+        return lvl
+    dlvl=level(root.left,lvl+1,k)
+    if(dlvl!=0):
+        return dlvl
+    dlvl=level(root.right,lvl+1,k)
+    return dlvl
+def func(root):
+    if root is None:
+        return 0
+    print(root.data)
+    if(root.left is not None):
+        func(root.left)
+    if(root.right is not None):
+        func(root.right)
+def mirror(root):
+	if root is None:
+		return
+	else:
+		mirror(root.left)
+		mirror(root.right)
+		print(root.data)
+		temp = root.left
+		root.left = root.right
+		root.right = temp
+def leftview(root):
+    queue=[]
+    queue.append(root)
+    print(root.data,end=" ")
+    while(len(queue)>0):
+        tmp=[]
+        kl=queue[:]
+        sk=len(kl)
+        sm=[]
+        for i in range(0,len(kl)):
+            
+            if(kl[i].left is not None):
+                sm.append(kl[i].left)
+                tmp.append(kl[i].left.data)
+            if(kl[i].right is not None):
+                sm.append(kl[i].right)
+                tmp.append(kl[i].right.data)
+        queue=sm[:]
+        try:
+            print(tmp[0],end=" ")
+        except:
+            pass
+def rightview(root):
+    queue=[]
+    queue.append(root)
+    print(root.data,end=" ")
+    while(len(queue)>0):
+        tmp=[]
+        kl=queue[:]
+        sk=len(kl)
+        sm=[]
+        for i in range(0,len(kl)):
+            
+            if(kl[i].left is not None):
+                sm.append(kl[i].left)
+                tmp.append(kl[i].left.data)
+            if(kl[i].right is not None):
+                sm.append(kl[i].right)
+                tmp.append(kl[i].right.data)
+        queue=sm[:]
+        try:
+            print(tmp[-1],end=" ")
+        except:
+            pass
+a=list(map(int,input().split(" ")))
+for i in range(0,len(a)):
+    if(i==0):
+        root=node(a[i])
+    else:
+        root.insert(a[i])
+delete(root,36)
+inorder(root)
+print()
+preorder(root)
+print()
+postorder(root)
+levelordertrav(root)
+res=[]
+mylogicinorder(root,res)
+lvl=1
+k=38
+print(level(root,lvl,k))
+func(root)
+mirror(root)
+leftview(root)
+print()
+rightview(root)

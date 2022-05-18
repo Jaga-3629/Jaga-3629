@@ -1,0 +1,140 @@
+#Write your code here
+###BEGIN SOLUTION
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+def insert(pl,kl):
+    mh=0
+    tmp=[]
+    for i in pl:
+        if(kl[mh]=="N"):
+            i.left=None
+        else:
+            i.left=Node(int(kl[mh]))
+            tmp.append(i.left)
+        mh+=1
+        if(kl[mh]=="N"):
+            i.right=None
+        else:
+            i.right=Node(int(kl[mh]))
+            tmp.append(i.right)
+        mh+=1
+    return tmp
+def inorder(root):
+    if(root):
+        inorder(root.left)
+        print(root.data,end=" ")
+        inorder(root.right)
+def minval(root):
+    h=root
+    while(h.left is not None):
+        pre=h
+        h=h.left
+    return h
+def delete(root,key):
+    if(root is None):
+        return root
+    if(key<root.data):
+        root.left=delete(root.left,key)
+    elif(key>root.data):
+        root.right=delete(root.right,key)
+    else:
+        if(root.left is None):
+            temp=root.right
+            root=None
+            return temp
+        elif(root.right is None):
+            temp=root.left
+            root=None
+            return temp
+        temp=minval(root.right)
+        root.data=temp.data
+        root.right=delete(root.right,temp.data)
+    return root
+###END SOLUTION
+a=[11,6,19,4,8,17,43,5,10,31,49]
+co=0
+i=len(a)-1
+while(co!=len(a)-2):
+    msk=((i+1)//2)-1
+    if(msk==-1):
+        pk=0
+    else:
+        pk=msk
+    if(a[i]>a[pk]):
+        tmp=a[i]
+        a[i]=a[pk]
+        a[pk]=tmp
+    else:
+        co+=1
+    i-=1
+    if(i==-1):
+        i=len(a)-1
+        co=0
+def rek(a):
+    qas=[]
+    ai=list(map(str,a))
+    level=4 #No.of levels
+    mat=[]
+    co=0
+    f=1
+    sta=0 
+    prevp=0
+    for i in range(level):
+        en=2**i+prevp
+        if(en>len(ai)):
+            en=len(ai)
+        tmp=ai[sta:en]
+        sta=en
+        prevp=sta
+        if(len(tmp)!=2**i):
+            for ppoi in range(0,2**i-len(tmp)):
+                tmp.append("N")
+        mat.append(tmp)
+        co+=1
+    for utr in mat:
+        for tew in utr:
+            if(tew!='N'):
+                qas.append(tew)
+    co=0
+    psk=[]
+    mwa=[]
+    while(co<level):
+        if(co==0):
+            root=Node(int(mat[0][0]))
+            psk.append(root)
+            mwa.append(psk)
+        else:
+            ms=insert(psk,mat[co])
+            psk=ms[:]
+            mwa.append(psk)
+        co+=1
+    rs=[]
+    rs.append(qas)
+    rs.append(mwa)
+    rs.append(psk)
+    return rs
+while(len(rek(a)[1])>=2):
+    mwa=rek(a)[1]
+    tmp=mwa[0][0].data
+    mwa[0][0].data=mwa[len(mwa)-1][len(mwa[len(mwa)-1])-1].data
+    mwa[len(mwa)-1][len(mwa[len(mwa)-1])-1].data=tmp
+    pmt=len(mwa[-1])-1
+    r=pmt//2
+    q=pmt%2
+    if(q==1):
+        pou=mwa[-2][r]
+        pou.right=None
+    else:
+        pou=mwa[-2][r]
+        pou.left=None
+    a=[]
+    for yuy in mwa:
+        for rur in yuy:
+            a.append(rur.data)
+    print(a)
+print(rek(a)[1])
+#delete(root,root.data)
+inorder(root)

@@ -1,0 +1,58 @@
+from collections import defaultdict
+graph=defaultdict(list)
+def addedges(graph,u,v):
+    graph[u].append(v)
+def printedges(graph):
+    edges=[]
+    for i in graph:
+        for j in graph[i]:
+            edges.append((i,j))
+    return edges
+def find_all_paths(graph, start, end, path =[]):
+    path = path + [start]
+    if start == end:
+        print("----------------------------------------------------------")
+        print("u:",path)
+        return [path]
+    paths = [] 
+    for node in graph[start]:
+        print(path)
+        if node not in path:
+            newpaths = find_all_paths(graph, node, end, path)
+            for newpath in newpaths:
+                paths.append(newpath)
+    return paths
+addedges(graph,'a','b')
+addedges(graph,'b','a')
+addedges(graph,'a','c')
+addedges(graph,'c','a')
+addedges(graph,'c','d')
+addedges(graph,'d','c')
+addedges(graph,'b','d')
+addedges(graph,'d','b')
+addedges(graph,'d','f')
+addedges(graph,'f','d')
+addedges(graph,'b','f')
+addedges(graph,'f','b')
+addedges(graph,'c','e')
+addedges(graph,'e','c')
+addedges(graph,'e','d')
+addedges(graph,'d','e')
+addedges(graph,'c','g')
+addedges(graph,'g','c')
+addedges(graph,'g','a')
+addedges(graph,'a','g')
+addedges(graph,'a','h')
+addedges(graph,'h','a')
+addedges(graph,'b','h')
+addedges(graph,'h','b')
+kl=[]
+find_all_paths(graph, 'g', 'f')
+print(graph['a'])
+print(graph['b'])
+print(graph['c'])
+print(graph['d'])
+print(graph['e'])
+print(graph['f'])
+print(graph['g'])
+print(graph['h'])

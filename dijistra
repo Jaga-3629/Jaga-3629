@@ -1,0 +1,139 @@
+from collections import defaultdict
+import math
+graph=defaultdict(list)
+def addedges(graph,u,v,x,lit,kit):
+    tmp=[]
+    tmp.append(u)
+    tmp.append(v)
+    tmp.append(x)
+    lit.append(tmp)
+    noel(u,v,kit)
+    skr=[]
+    skr.append(v)
+    skr.append(x)
+    graph[u].append(skr)
+def noel(ty,uy,kit):
+    kit.append(ty)
+    kit.append(uy)
+    joi=list(set(kit))
+    return joi
+def func(mst,graph,so):
+    li1=[]
+    for hu in range(len(mst)):
+        li1.append(math.inf)
+    li1.insert(ord(so)-97,0)
+    li1.pop(ord(so)-96)
+    res=[]
+    chec=[]
+    res.append(so)
+    while(len(res)<len(mst)):
+        smr=graph[so]
+        da=[]
+        ver=[]
+        for jt in smr:
+            '''print(jt[0])
+            print(jt[1])'''
+            if(li1[ord(so)-97]+jt[1]<li1[ord(jt[0])-97]):
+                #if(li[ord(so)-97])
+                li1.insert(ord(jt[0])-97,li1[ord(so)-97]+jt[1])
+                li1.pop(ord(jt[0])-96)
+            da.append(li1[ord(jt[0])-97])
+            ver.append(jt[0])
+            chec.append(jt[0])
+        da1=[]
+        ver1=[]
+        print("li",li1)
+        print("v:",ver)
+        print("d:",da)
+        for ku in range(0,len(ver)):
+            if(ver[ku] not in res):
+                ver1.append(ver[ku])
+                da1.append(da[ku])
+        print("v1:",ver1)
+        print("d1:",da1)
+        if(len(da1)>0):
+            krw=da1.index(min(da1))
+            so=ver1[krw]
+            res.append(so)
+        else:
+            etr=list(set(mst)^set(res))
+            da=[]
+            ver=[]
+            for gf in etr:
+                ver.append(gf)
+                da.append(li1[ord(gf)-97])
+            krw=da.index(min(da))
+            so=ver[krw]
+            res.append(so)
+        print("r:",res)
+        chec=list(set(chec))
+        print("ch:",chec)
+    print(res)
+lit=[]
+kit=[]
+          H                                                                                                               
+       1 / \ 2
+        / 3  \
+       A------B
+    11/|      | \ 4
+     / |      |  \
+    G  |12    |6  F     
+    \  |      |   /
+  10 \ |      |  /5
+       C------D 
+       \  7  /
+      9 \   / 8
+          E
+addedges(graph,'a','h',1,lit,kit)
+addedges(graph,'h','a',1,lit,kit)
+addedges(graph,'h','b',2,lit,kit)
+addedges(graph,'b','h',2,lit,kit)
+addedges(graph,'b','f',4,lit,kit)
+addedges(graph,'f','b',4,lit,kit)
+addedges(graph,'f','d',5,lit,kit)
+addedges(graph,'d','f',5,lit,kit)
+addedges(graph,'b','d',6,lit,kit)
+addedges(graph,'d','b',6,lit,kit)
+addedges(graph,'d','e',8,lit,kit)
+addedges(graph,'e','d',8,lit,kit)
+addedges(graph,'d','c',7,lit,kit)
+addedges(graph,'c','d',7,lit,kit)
+addedges(graph,'c','e',9,lit,kit)
+addedges(graph,'e','c',9,lit,kit)
+addedges(graph,'a','c',12,lit,kit)
+addedges(graph,'c','a',12,lit,kit)
+addedges(graph,'c','g',10,lit,kit)
+addedges(graph,'g','c',10,lit,kit)
+addedges(graph,'a','g',11,lit,kit)
+addedges(graph,'g','a',11,lit,kit)
+addedges(graph,'a','b',3,lit,kit)
+addedges(graph,'b','a',3,lit,kit)
+#https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
+'''addedges(graph,'a','b',4,lit,kit)
+addedges(graph,'b','a',4,lit,kit)
+addedges(graph,'b','c',8,lit,kit)
+addedges(graph,'c','b',8,lit,kit)
+addedges(graph,'c','d',7,lit,kit)
+addedges(graph,'d','c',7,lit,kit)
+addedges(graph,'d','e',9,lit,kit)
+addedges(graph,'e','d',9,lit,kit)
+addedges(graph,'e','f',10,lit,kit)
+addedges(graph,'f','e',10,lit,kit)
+addedges(graph,'f','g',2,lit,kit)
+addedges(graph,'g','f',2,lit,kit)
+addedges(graph,'g','h',1,lit,kit)
+addedges(graph,'h','g',1,lit,kit)
+addedges(graph,'h','a',8,lit,kit)
+addedges(graph,'a','h',8,lit,kit)
+addedges(graph,'b','h',11,lit,kit)
+addedges(graph,'h','b',11,lit,kit)
+addedges(graph,'c','i',2,lit,kit)
+addedges(graph,'i','c',2,lit,kit)
+addedges(graph,'i','g',6,lit,kit)
+addedges(graph,'g','i',6,lit,kit)
+addedges(graph,'i','h',7,lit,kit)
+addedges(graph,'h','i',7,lit,kit)
+addedges(graph,'c','f',4,lit,kit)
+addedges(graph,'f','c',4,lit,kit)'''
+func(noel('b','a',kit),graph,'h')
+#print(graph['a'])

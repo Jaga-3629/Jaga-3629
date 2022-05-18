@@ -1,0 +1,53 @@
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+def insert(pl,kl):
+    mh=0
+    tmp=[]
+    for i in pl:
+        if(kl[mh]=="N"):
+            i.left=None
+        else:
+            i.left=Node(int(kl[mh]))
+            tmp.append(i.left)
+        mh+=1
+        if(kl[mh]=="N"):
+            i.right=None
+        else:
+            i.right=Node(int(kl[mh]))
+            tmp.append(i.right)
+        mh+=1
+    return tmp
+def inorder(root):
+    if(root):
+        inorder(root.left)
+        print(root.data,end=" ")
+        inorder(root.right)
+level=int(input())
+mat=[]
+co=0
+f=1
+for i in range(level):
+    tmp=[]
+    tmp=list(map(str,input().split()))
+    ls=tmp.count("N")
+    if(((len(tmp)-ls)%2==0) and (co>0)):
+        f=0
+    mat.append(tmp)
+    co+=1
+co=0
+psk=[]
+if(f==0):
+    while(co<level):
+        if(co==0):
+            root=Node(int(mat[0][0]))
+            psk.append(root)
+        else:
+            ms=insert(psk,mat[co])
+            psk=ms[:]
+        co+=1
+else:
+    print("The input given is not suitable for a binary tree")
+inorder(root)

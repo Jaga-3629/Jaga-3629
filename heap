@@ -1,0 +1,86 @@
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+def insert(pl,kl):
+    mh=0
+    tmp=[]
+    for i in pl:
+        if(kl[mh]=="N"):
+            i.left=None
+        else:
+            i.left=Node(int(kl[mh]))
+            tmp.append(i.left)
+        mh+=1
+        if(kl[mh]=="N"):
+            i.right=None
+        else:
+            i.right=Node(int(kl[mh]))
+            tmp.append(i.right)
+        mh+=1
+    return tmp
+def inorder(root):
+    if(root):
+        inorder(root.left)
+        print(root.data,end=" ")
+        inorder(root.right)
+a=[11,6,19,4,8,17,43,5,10,31,49]
+co=0
+i=len(a)-1
+while(co!=len(a)-2):
+    msk=((i+1)//2)-1
+    if(msk==-1):
+        pk=0
+    else:
+        pk=msk
+    if(a[i]>a[pk]):
+        tmp=a[i]
+        a[i]=a[pk]
+        a[pk]=tmp
+    else:
+        co+=1
+    i-=1
+    if(i==-1):
+        i=len(a)-1
+        co=0
+    print("i:",i)
+    print("c",co)
+print(a)
+ai=list(map(str,a))
+level=4
+mat=[]
+co=0
+f=1
+sta=0
+prevp=0
+for i in range(level):
+    en=2**i+prevp
+    if(en>len(ai)):
+        en=len(ai)
+    tmp=ai[sta:en]
+    sta=en
+    prevp=sta
+    if(len(tmp)!=2**i):
+        for ppoi in range(0,2**i-len(tmp)):
+            tmp.append("N")
+    ls=tmp.count("N")
+    if(((len(tmp)-ls)%2==0) and (co>0)):
+        f=0
+    mat.append(tmp)
+    co+=1
+#print(mat)
+co=0
+psk=[]
+if(f==0):
+    while(co<level):
+        if(co==0):
+            root=Node(int(mat[0][0]))
+            psk.append(root)
+        else:
+            ms=insert(psk,mat[co])
+            psk=ms[:]
+        co+=1
+else:
+    print("The input given is not suitable for a binary tree")
+#inorder(root)

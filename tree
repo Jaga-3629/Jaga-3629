@@ -1,0 +1,51 @@
+class node:
+    def __init__(self,key):
+        self.left=None
+        self.right=None
+        self.data=key
+def printInorder(root):
+    if root:
+        printInorder(root.left)
+        print(root.data,end=" ")
+        printInorder(root.right)
+def preorder(root):
+    if root:
+        print(root.data,end=" ")
+        preorder(root.left)
+        preorder(root.right)
+def postorder(root):
+    if root:
+        postorder(root.left)
+        postorder(root.right)
+        print(root.data,end=" ")
+def search(root,key):
+    if root.left is not None:
+        temp =  root.left.search(key)
+        if temp is not None:
+            return temp
+    if root.right is not None:
+        temp =  root.right.search(key)
+        return temp
+    return None
+def count_nodes(root):
+    if root is None:
+        return 0
+    return 1 + count_nodes(root.left) + count_nodes(root.right)
+root=node(89654)
+root.left=node(38547)
+root.right=node(584)
+root.left.left=node(4748)
+root.left.right=node(1388)
+root.right.left=node(100)
+root.right.right=node(38473)
+printInorder(root)
+print()
+print()
+preorder(root)
+print()
+print()
+postorder(root)
+print()
+print(search(root,100))
+print()
+print(count_nodes(root))

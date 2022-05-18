@@ -1,0 +1,89 @@
+from collections import defaultdict
+graph=defaultdict(list)
+def addedges(graph,u,v,x,lit,kit):
+    tmp=[]
+    tmp.append(u)
+    tmp.append(v)
+    tmp.append(x)
+    lit.append(tmp)
+    noel(u,v,kit)
+    graph[u].append(v)
+def noel(ty,uy,kit):
+    kit.append(ty)
+    kit.append(uy)
+    joi=list(set(kit))
+    return joi
+def sort(lit):
+    msk=[]
+    res=[]
+    pit=len(lit)
+    qwa=lit[:]
+    lit=[]
+    kr=0
+    while(kr<pit):
+        lit.append(qwa[kr])
+        kr+=2
+    jkl=lit[:]
+    for yur in lit:
+        msk.append(yur[2])
+    msk.sort()
+    for lp in msk:
+        for pu in jkl:
+            if(lp==pu[2]):
+                res.append(pu)
+                jkl.remove(pu)
+    kpr=[]
+    for rp in noel('b','a',kit):
+        gcv=[]
+        gcv.append(rp)
+        kpr.append(gcv)
+    psr=[]
+    for trk in res:
+        co=0
+        for maz in kpr:
+            if(trk[0] in maz):
+                c1=co
+            if(trk[1] in maz):
+                c2=co
+            co+=1
+        if(c1!=c2):
+            tmp=[]
+            tmp.append(trk[0])
+            tmp.append(trk[1])
+            psr.append(tmp)
+            rsv=kpr[c1]+kpr[c2]
+            if(c1<c2):
+                kpr.pop(c2)
+                kpr.pop(c1)
+            else:
+                kpr.pop(c1)
+                kpr.pop(c2)
+            kpr.insert(0,rsv)
+    print(psr)
+lit=[]
+kit=[]
+addedges(graph,'a','h',1,lit,kit)
+addedges(graph,'h','a',1,lit,kit)
+addedges(graph,'h','b',2,lit,kit)
+addedges(graph,'b','h',2,lit,kit)
+addedges(graph,'b','f',4,lit,kit)
+addedges(graph,'f','b',4,lit,kit)
+addedges(graph,'f','d',5,lit,kit)
+addedges(graph,'d','f',5,lit,kit)
+addedges(graph,'b','d',6,lit,kit)
+addedges(graph,'d','b',6,lit,kit)
+addedges(graph,'d','e',8,lit,kit)
+addedges(graph,'e','d',8,lit,kit)
+addedges(graph,'d','c',7,lit,kit)
+addedges(graph,'c','d',7,lit,kit)
+addedges(graph,'c','e',9,lit,kit)
+addedges(graph,'e','c',9,lit,kit)
+addedges(graph,'a','c',12,lit,kit)
+addedges(graph,'c','a',12,lit,kit)
+addedges(graph,'c','g',10,lit,kit)
+addedges(graph,'g','c',10,lit,kit)
+addedges(graph,'a','g',11,lit,kit)
+addedges(graph,'g','a',11,lit,kit)
+addedges(graph,'a','b',3,lit,kit)
+addedges(graph,'b','a',3,lit,kit)
+sort(lit)
